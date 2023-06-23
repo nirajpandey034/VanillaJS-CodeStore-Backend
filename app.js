@@ -17,7 +17,7 @@ const contentRoute = require("./routes/contentRoute");
 app.use("/content", contentRoute);
 
 app.use("/", (req, res) => {
-  res.status(500).json({ info: "Hello Kammo" });
+  res.status(500).json({ info: "Hello" });
 });
 
 app.listen(port, () => {

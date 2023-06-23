@@ -23,7 +23,9 @@ app.use("/user", userRoute);
 app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.use("/", (req, res) => {
-  res.status(500).json({ info: "Hello" });
+  res.status(500).json({
+    info: "Get Full API Documentation: https://dull-puce-badger-tux.cyclic.app/doc/",
+  });
 });
 
 app.listen(port, () => {

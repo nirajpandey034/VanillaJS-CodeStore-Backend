@@ -4,6 +4,7 @@ require("dotenv").config();
 const ContentModel = require("../models/Content");
 const TitleModel = require("../models/Title");
 const { ObjectId } = require("mongodb");
+const auth = require("../middleware/auth");
 
 //get all contents
 router.get("/get_content", async (req, res, next) => {
@@ -21,7 +22,7 @@ router.get("/get_content", async (req, res, next) => {
 });
 
 // post content
-router.post("/post_content", async (req, res) => {
+router.post("/post_content", auth, async (req, res) => {
   const content = new ContentModel(req.body);
   let title = {};
 

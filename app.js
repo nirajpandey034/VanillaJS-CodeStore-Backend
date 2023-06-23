@@ -13,8 +13,10 @@ DBConnect(); //connection to db
 
 //routes
 const contentRoute = require("./routes/contentRoute");
+const userRoute = require("./routes/userRoute");
 
 app.use("/content", contentRoute);
+app.use("/user", userRoute);
 
 app.use("/", (req, res) => {
   res.status(500).json({ info: "Hello" });

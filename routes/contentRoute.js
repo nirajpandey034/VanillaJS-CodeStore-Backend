@@ -49,7 +49,7 @@ router.get("/get_titles", async (req, res) => {
   }
 });
 
-router.post("/get_code_with_title", async (req, res) => {
+router.post("/get_content_with_id", async (req, res) => {
   const _id = req.body.id;
   try {
     await ContentModel.find({ _id: new ObjectId(_id) })
@@ -67,7 +67,12 @@ router.post("/get_code_with_title", async (req, res) => {
 router.get("/", (req, res, next) => {
   res
     .status(200)
-    .json({ "Route 1": "/get_content", "Route 2": "/post_content" });
+    .json({
+      "Route 1": "/get_content",
+      "Route 2": "/post_content",
+      "Route 3": "/get_titles",
+      "Route 4": "/get_content_with_id",
+    });
 });
 
 module.exports = router;

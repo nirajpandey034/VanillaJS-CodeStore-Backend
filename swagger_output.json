@@ -5,10 +5,10 @@
     "title": "VanillaJS-CodeStore",
     "description": ""
   },
-  "host": "localhost:3000",
+  "host": "dull-puce-badger-tux.cyclic.app",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/content/get_content": {

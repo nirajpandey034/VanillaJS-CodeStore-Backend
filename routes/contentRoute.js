@@ -31,7 +31,7 @@ router.post("/post_content", auth, async (req, res) => {
     title = new TitleModel({
       title: content.title,
       id: data._id.valueOf(),
-      liveurl: data.liveurl,
+      liveurl: content.liveurl,
     });
     await title.save();
     res.status(200).json({ info: `${content.title} is added successfully` });

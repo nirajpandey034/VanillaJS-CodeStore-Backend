@@ -20,6 +20,9 @@ const ContentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  liveurl: {
+    type: String,
+  },
 });
 
 const Content = mongoose.model("source_codes", ContentSchema);

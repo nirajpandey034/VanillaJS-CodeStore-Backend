@@ -17,9 +17,11 @@ DBConnect(); //connection to db
 //routes
 const contentRoute = require("./routes/contentRoute");
 const userRoute = require("./routes/userRoute");
+const commentRoute = require("./routes/commentRoute");
 
 app.use("/content", contentRoute);
 app.use("/user", userRoute);
+app.use("/comment", commentRoute);
 app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.use("/", (req, res) => {

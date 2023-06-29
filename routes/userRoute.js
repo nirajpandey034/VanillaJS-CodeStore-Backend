@@ -41,7 +41,7 @@ router.post("/register", async (request, response) => {
     // return new user
     return response.status(201).json({ token: token, success: true });
   } catch (err) {
-    console.log(err);
+    return response.status(500).json({ error: err, success: false });
   }
 });
 
@@ -68,17 +68,15 @@ router.post("/login", async (request, response) => {
       );
 
       // send response
-      return response
-        .status(200)
-        .json({
-          token: token,
-          success: true,
-          user: `${user.firstName} ${user.lastName}`,
-        });
+      return response.status(200).json({
+        token: token,
+        success: true,
+        user: `${user.firstName} ${user.lastName}`,
+      });
     }
     return response.status(400).json({ success: false });
   } catch (err) {
-    console.log(err);
+    return response.status(500).json({ error: err });
   }
 });
 

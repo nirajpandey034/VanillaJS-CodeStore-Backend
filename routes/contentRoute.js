@@ -11,13 +11,13 @@ router.get("/get_content", async (req, res, next) => {
   try {
     await ContentModel.find({})
       .then((contents) => {
-        res.json({ data: contents });
+        return res.json({ data: contents });
       })
       .catch((error) => {
-        res.json({ error: error });
+        return res.json({ error: error });
       });
   } catch (error) {
-    res.status(500).send("Error Occured: " + error.message);
+    return res.status(500).send("Error Occured: " + error.message);
   }
 });
 
@@ -34,9 +34,11 @@ router.post("/post_content", auth, async (req, res) => {
       liveurl: content.liveurl,
     });
     await title.save();
-    res.status(200).json({ info: `${content.title} is added successfully` });
+    return res
+      .status(200)
+      .json({ info: `${content.title} is added successfully` });
   } catch (error) {
-    res.status(500).json({ error: "Error Occured: " + error.message });
+    return res.status(500).json({ error: "Error Occured: " + error.message });
   }
 });
 // get title with ids
@@ -44,13 +46,13 @@ router.get("/get_titles", async (req, res) => {
   try {
     await TitleModel.find({})
       .then((titles) => {
-        res.json({ data: titles });
+        return res.json({ data: titles });
       })
       .catch((error) => {
-        res.json({ error: error });
+        return res.json({ error: error });
       });
   } catch (error) {
-    res.status(500).send("Error Occured: " + error.message);
+    return res.status(500).send("Error Occured: " + error.message);
   }
 });
 
@@ -59,16 +61,27 @@ router.post("/get_content_with_id", async (req, res) => {
   try {
     await ContentModel.find({ _id: new ObjectId(_id) })
       .then((content) => {
-        res.json({ data: content });
+        return res.json({ data: content });
       })
       .catch((error) => {
-        res.json({ error: error });
+        return res.json({ error: error });
       });
   } catch (error) {
-    res.status(500).send("Error Occured: " + error.message);
+    return res.status(500).send("Error Occured: " + error.message);
   }
 });
 
+router.post("/search_item", async (req, res) => {
+  const searchStr = req.body.title;
+  try {
+    const response = await TitleModel.find({
+      title: { $regex: searchStr, $options: "i" },
+    });
+    return res.status(200).json({ data: response });
+  } catch (err) {
+    return res.status(500).send("Error Occured: " + err.message);
+  }
+});
 router.get("/", (req, res, next) => {
   res.status(200).json({
     "Route 1": "/get_content",

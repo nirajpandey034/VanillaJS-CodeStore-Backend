@@ -9,7 +9,7 @@ const TitleSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  liveURL: {
+  liveurl: {
     type: String,
   },
 });

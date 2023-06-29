@@ -9,6 +9,9 @@ const TitleSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  liveURL: {
+    type: String,
+  },
 });
 
 const Title = mongoose.model("title_with_ids", TitleSchema);

@@ -28,7 +28,11 @@ router.post("/post_content", auth, async (req, res) => {
 
   try {
     const data = await content.save();
-    title = new TitleModel({ title: content.title, id: data._id.valueOf() });
+    title = new TitleModel({
+      title: content.title,
+      id: data._id.valueOf(),
+      liveurl: data.liveurl,
+    });
     await title.save();
     res.status(200).json({ info: `${content.title} is added successfully` });
   } catch (error) {

@@ -45,14 +45,13 @@ router.post("/post_content", auth, async (req, res) => {
 router.post("/update_content", auth, async (req, res) => {
   let content = req.body;
   const filter = { _id: new ObjectId(content._id) };
-  delete content._id;
-  delete content.title;
-  console.log(content);
+  delete content?._id;
+  delete content?.title;
   try {
     const data = await ContentModel.findByIdAndUpdate(filter, content);
     return res
       .status(200)
-      .json({ info: `${data.title} is updated successfully` });
+      .json({ info: `${req.body.title} is updated successfully` });
   } catch (error) {
     return res.status(500).json({ error: "Error Occured: " + error.message });
   }

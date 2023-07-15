@@ -41,6 +41,20 @@ router.post("/post_content", auth, async (req, res) => {
     return res.status(500).json({ error: "Error Occured: " + error.message });
   }
 });
+// post content
+router.post("/update_content", auth, async (req, res) => {
+  let content = req.body;
+  const filter = { _id: new ObjectId(content._id) };
+  delete content._id;
+  try {
+    const data = await ContentModel.findByIdAndUpdate(filter, content);
+    return res
+      .status(200)
+      .json({ info: `${data.title} is updated successfully` });
+  } catch (error) {
+    return res.status(500).json({ error: "Error Occured: " + error.message });
+  }
+});
 // get title with ids
 router.get("/get_titles", async (req, res) => {
   try {

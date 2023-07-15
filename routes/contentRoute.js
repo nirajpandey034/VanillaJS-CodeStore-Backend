@@ -46,6 +46,8 @@ router.post("/update_content", auth, async (req, res) => {
   let content = req.body;
   const filter = { _id: new ObjectId(content._id) };
   delete content._id;
+  delete content.title;
+  console.log(content);
   try {
     const data = await ContentModel.findByIdAndUpdate(filter, content);
     return res

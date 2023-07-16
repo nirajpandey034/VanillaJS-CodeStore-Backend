@@ -20,5 +20,14 @@ router.post("/add_comment", async (request, response) => {
     return response.status(500).json({ success: false });
   }
 });
+router.get("/get_comments", async (request, response) => {
+  try {
+    const data = await CommentModal.find({});
+    console.log(data);
+    return response.status(200).json({ success: true, comments: data });
+  } catch (err) {
+    return response.status(500).json({ success: false });
+  }
+});
 
 module.exports = router;

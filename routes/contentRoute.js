@@ -41,7 +41,7 @@ router.post("/post_content", auth, async (req, res) => {
     return res.status(500).json({ error: "Error Occured: " + error.message });
   }
 });
-// post content
+// update content
 router.post("/update_content", auth, async (req, res) => {
   let content = req.body;
   const filter = { _id: new ObjectId(content._id) };
@@ -51,7 +51,22 @@ router.post("/update_content", auth, async (req, res) => {
     const data = await ContentModel.findByIdAndUpdate(filter, content);
     return res
       .status(200)
-      .json({ info: `${req.body.title} is updated successfully` });
+      .json({ info: `${content._id} is updated successfully` });
+  } catch (error) {
+    return res.status(500).json({ error: "Error Occured: " + error.message });
+  }
+});
+
+// delete content
+router.delete("/delete_content", auth, async (req, res) => {
+  let content = req.body;
+  const filter = { _id: new ObjectId(content._id) };
+  try {
+    const data = await ContentModel.deleteOne(filter);
+    const result = await TitleModel.deleteOne({ id: content._id });
+    return res
+      .status(200)
+      .json({ info: `${content._id} is deleted successfully` });
   } catch (error) {
     return res.status(500).json({ error: "Error Occured: " + error.message });
   }
